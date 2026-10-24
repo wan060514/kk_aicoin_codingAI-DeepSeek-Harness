@@ -1,0 +1,7 @@
+﻿node : needle not found
+所在位置 行:3 字符: 1
++ node "$T\fmt.js" $F "compileResult:_0x3301b4=void 0x0" 500 3000 2>&1  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (needle not found:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

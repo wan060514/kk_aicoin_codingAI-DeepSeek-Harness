@@ -1,0 +1,127 @@
+{
+  "languageId": "AIScript",
+  "versionDirective": "// @version=2",
+  "keywords": [
+    "and",
+    "any",
+    "bool",
+    "break",
+    "class",
+    "dict",
+    "else",
+    "false",
+    "finally",
+    "float",
+    "for",
+    "if",
+    "iff",
+    "int",
+    "nan",
+    "not",
+    "or",
+    "range",
+    "return",
+    "string",
+    "true",
+    "var",
+    "varip"
+  ],
+  "operators": [
+    "<=",
+    ">=",
+    "==",
+    "!=",
+    "+",
+    "-",
+    "*",
+    "/",
+    "%",
+    "++",
+    "--",
+    "^",
+    "!",
+    "&&",
+    "||",
+    "?",
+    ":",
+    "=",
+    "+=",
+    "-=",
+    "*=",
+    "/=",
+    "%=",
+    "^="
+  ],
+  "builtinVars": [
+    "amount",
+    "bar_index",
+    "close",
+    "high",
+    "hl2",
+    "hlc3",
+    "liq_long_count",
+    "liq_long_size",
+    "liq_long_turnover",
+    "liq_long_vol",
+    "liq_short_count",
+    "liq_short_size",
+    "liq_short_turnover",
+    "liq_short_vol",
+    "low",
+    "ohlc4",
+    "oi_close",
+    "open",
+    "syminfo",
+    "time",
+    "timeclose",
+    "timeend",
+    "timenow",
+    "timestart",
+    "vbuy",
+    "volume",
+    "vsell",
+    "wmb_buy",
+    "wmb_sell"
+  ],
+  "namespaces": [
+    "barstate",
+    "box",
+    "label",
+    "line",
+    "strategy",
+    "syminfo"
+  ],
+  "types": [
+    "int",
+    "float",
+    "bool",
+    "string",
+    "dict",
+    "any"
+  ],
+  "comments": {
+    "line": "//",
+    "block": [
+      "/*",
+      "*/"
+    ]
+  },
+  "historyRef": {
+    "syntax": "series[n]",
+    "maxLookback": 500
+  },
+  "indexRef": {
+    "syntax": "array{k}",
+    "maxLength": 1000,
+    "zeroBased": true
+  },
+  "limits": {
+    "forLoopMaxIterations": 500,
+    "historyLookbackMax": 500,
+    "indexLengthMax": 1000
+  },
+  "folding": {
+    "start": "// region",
+    "end": "// endregion"
+  }
+}

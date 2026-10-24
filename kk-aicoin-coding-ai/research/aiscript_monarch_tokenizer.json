@@ -1,0 +1,569 @@
+{
+  "_source": {
+    "files": [
+      "aicoin_dist/extracted/dist/renderer/2776.js",
+      "aicoin_dist/extracted/dist/renderer/551.js"
+    ],
+    "webpackModuleId": "0xf21f (decimal 61983)",
+    "note": "Extracted by executing the module factory in a Node vm (research/_tools/vm-extract.js), not by reading the minified text. Both copies of module 0xf21f were executed; their JSON serialisations are byte-identical (8006 chars)."
+  },
+  "languageId": "AIScript",
+  "keywords": [
+    "and",
+    "any",
+    "bool",
+    "break",
+    "class",
+    "dict",
+    "else",
+    "false",
+    "finally",
+    "float",
+    "for",
+    "if",
+    "iff",
+    "int",
+    "nan",
+    "not",
+    "or",
+    "range",
+    "return",
+    "string",
+    "true",
+    "var",
+    "varip"
+  ],
+  "operators": [
+    "<=",
+    ">=",
+    "==",
+    "!=",
+    "+",
+    "-",
+    "*",
+    "/",
+    "%",
+    "++",
+    "--",
+    "^",
+    "!",
+    "&&",
+    "||",
+    "?",
+    ":",
+    "=",
+    "+=",
+    "-=",
+    "*=",
+    "/=",
+    "%=",
+    "^="
+  ],
+  "builtinVars": [
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "amount",
+    "time",
+    "timenow",
+    "timestart",
+    "timeend",
+    "bar_index",
+    "syminfo"
+  ],
+  "tokenizer": {
+    "root": [
+      {
+        "regex": "[{}]",
+        "action": "delimiter.bracket"
+      },
+      {
+        "include": "common"
+      }
+    ],
+    "common": [
+      {
+        "regex": "(?!if|for|while|switch|return)([a-zA-Z\\u4E00-\\u9FAF_$][0-9a-zA-Z\\u4E00-\\u9FAF_$]*)(\\s*)(\\()",
+        "action": [
+          "function",
+          "",
+          "@brackets"
+        ]
+      },
+      {
+        "regex": "#?[a-z_$][\\w$]*",
+        "action": {
+          "cases": {
+            "@keywords": "keyword",
+            "@builtinVars": "variable.builtin",
+            "@default": "identifier"
+          }
+        }
+      },
+      {
+        "regex": "[A-Z][\\w\\$]*",
+        "action": "type.identifier"
+      },
+      {
+        "include": "@whitespace"
+      },
+      {
+        "regex": "[()\\[\\]]",
+        "action": "@brackets"
+      },
+      {
+        "regex": "[<>](?!@symbols)",
+        "action": "@brackets"
+      },
+      {
+        "regex": "!(?=([^=]|$))",
+        "action": "delimiter"
+      },
+      {
+        "regex": "@symbols",
+        "action": {
+          "cases": {
+            "@operators": "delimiter",
+            "@default": ""
+          }
+        }
+      },
+      {
+        "regex": "(@digits)[eE]([\\-+]?(@digits))?",
+        "action": "number.float"
+      },
+      {
+        "regex": "(@digits)\\.(@digits)([eE][\\-+]?(@digits))?",
+        "action": "number.float"
+      },
+      {
+        "regex": "(@digits)n?",
+        "action": "number"
+      },
+      {
+        "regex": "[;,.]",
+        "action": "delimiter"
+      },
+      {
+        "regex": "\"([^\"\\\\]|\\\\.)*$",
+        "action": "string.invalid"
+      },
+      {
+        "regex": "'([^'\\\\]|\\\\.)*$",
+        "action": "string.invalid"
+      },
+      {
+        "regex": "\"",
+        "action": "string"
+      },
+      {
+        "regex": "'",
+        "action": "string"
+      }
+    ],
+    "whitespace": [
+      {
+        "regex": "[ \\t\\r\\n]+",
+        "action": ""
+      },
+      {
+        "regex": "\\/\\*\\*(?!\\/)",
+        "action": "comment.doc"
+      },
+      {
+        "regex": "\\/\\*",
+        "action": "comment"
+      },
+      {
+        "regex": "\\/\\/.*$",
+        "action": "comment"
+      }
+    ],
+    "comment": [
+      {
+        "regex": "[^\\/*]+",
+        "action": "comment"
+      },
+      {
+        "regex": "\\*\\/",
+        "action": "comment"
+      },
+      {
+        "regex": "[\\/*]",
+        "action": "comment"
+      }
+    ],
+    "jsdoc": [
+      {
+        "regex": "[^\\/*]+",
+        "action": "comment.doc"
+      },
+      {
+        "regex": "\\*\\/",
+        "action": "comment.doc"
+      },
+      {
+        "regex": "[\\/*]",
+        "action": "comment.doc"
+      }
+    ],
+    "string_double": [
+      {
+        "regex": "[^\\\\\"]+",
+        "action": "string"
+      },
+      {
+        "regex": "@escapes",
+        "action": "string.escape"
+      },
+      {
+        "regex": "\\\\.",
+        "action": "string.escape.invalid"
+      },
+      {
+        "regex": "\"",
+        "action": "string"
+      }
+    ],
+    "string_single": [
+      {
+        "regex": "[^\\\\']+",
+        "action": "string"
+      },
+      {
+        "regex": "@escapes",
+        "action": "string.escape"
+      },
+      {
+        "regex": "\\\\.",
+        "action": "string.escape.invalid"
+      },
+      {
+        "regex": "'",
+        "action": "string"
+      }
+    ],
+    "bracketCounting": [
+      {
+        "regex": "\\{",
+        "action": "delimiter.bracket"
+      },
+      {
+        "regex": "\\}",
+        "action": "delimiter.bracket"
+      },
+      {
+        "include": "common"
+      }
+    ]
+  },
+  "languageConfiguration": {
+    "wordPattern": {
+      "regex": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
+      "regexFlags": "g"
+    },
+    "comments": {
+      "lineComment": "//",
+      "blockComment": [
+        "/*",
+        "*/"
+      ]
+    },
+    "brackets": [
+      [
+        "{",
+        "}"
+      ],
+      [
+        "[",
+        "]"
+      ],
+      [
+        "(",
+        ")"
+      ]
+    ],
+    "onEnterRules": [
+      {
+        "beforeText": {
+          "regex": "^\\s*\\/\\*\\*(?!\\/)([^\\*]|\\*(?!\\/))*$"
+        },
+        "afterText": {
+          "regex": "^\\s*\\*\\/$"
+        },
+        "action": {
+          "indentAction": 2,
+          "appendText": " * "
+        }
+      },
+      {
+        "beforeText": {
+          "regex": "^\\s*\\/\\*\\*(?!\\/)([^\\*]|\\*(?!\\/))*$"
+        },
+        "action": {
+          "indentAction": 0,
+          "appendText": " * "
+        }
+      },
+      {
+        "beforeText": {
+          "regex": "^(\\t|(\\ \\ ))*\\ \\*(\\ ([^\\*]|\\*(?!\\/))*)?$"
+        },
+        "action": {
+          "indentAction": 0,
+          "appendText": "* "
+        }
+      },
+      {
+        "beforeText": {
+          "regex": "^(\\t|(\\ \\ ))*\\ \\*\\/\\s*$"
+        },
+        "action": {
+          "indentAction": 0,
+          "removeText": 1
+        }
+      }
+    ],
+    "autoClosingPairs": [
+      {
+        "open": "{",
+        "close": "}"
+      },
+      {
+        "open": "[",
+        "close": "]"
+      },
+      {
+        "open": "(",
+        "close": ")"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "notIn": [
+          "string"
+        ]
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "notIn": [
+          "string",
+          "comment"
+        ]
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "notIn": [
+          "string",
+          "comment"
+        ]
+      },
+      {
+        "open": "/**",
+        "close": " */",
+        "notIn": [
+          "string"
+        ]
+      }
+    ],
+    "folding": {
+      "markers": {
+        "start": {
+          "regex": "^\\s*\\/\\/\\s*#?region\\b"
+        },
+        "end": {
+          "regex": "^\\s*\\/\\/\\s*#?endregion\\b"
+        }
+      }
+    }
+  },
+  "colors": {
+    "light": {
+      "name": "ace-light",
+      "theme": {
+        "base": "vs",
+        "inherit": true,
+        "rules": [
+          {
+            "token": "",
+            "foreground": "#5c6773"
+          },
+          {
+            "token": "keyword",
+            "foreground": "#0f8cff"
+          },
+          {
+            "token": "function",
+            "foreground": "#0f8cff"
+          },
+          {
+            "token": "comment",
+            "foreground": "#8c96a3"
+          },
+          {
+            "token": "normal",
+            "foreground": "#001734"
+          },
+          {
+            "token": "brackets",
+            "foreground": "#001734"
+          },
+          {
+            "token": "string",
+            "foreground": "#00b883"
+          },
+          {
+            "token": "variable.builtin",
+            "foreground": "#bb5c4e"
+          },
+          {
+            "token": "identifier",
+            "foreground": "#001734"
+          },
+          {
+            "token": "number",
+            "foreground": "#dd8c42"
+          },
+          {
+            "token": "delimiter",
+            "foreground": "#6aa998"
+          }
+        ],
+        "colors": {
+          "editor.background": "#ffffff",
+          "editor.selectionBackground": "#0f8cff60",
+          "editor.inactiveSelectionBackground": "#0f8cff50",
+          "editor.selectionHighlightBackground": "#0f8cff10",
+          "editor.selectionHighlightBorder": "#0f8cff80",
+          "editorCursor.foreground": "#0f8cff",
+          "editor.lineHighlightBackground": "#0f8cff20",
+          "editorLineNumber.foreground": "#bfc5cc",
+          "editorLineNumber.activeForeground": "#59677b",
+          "diffEditor.insertedLineBackground": "#17a67312",
+          "diffEditor.insertedTextBackground": "#17a67324",
+          "diffEditor.removedLineBackground": "#e45b5b12",
+          "diffEditor.removedTextBackground": "#e45b5b24",
+          "diffEditorGutter.insertedLineBackground": "#17a6731a",
+          "diffEditorGutter.removedLineBackground": "#e45b5b1a",
+          "editorHoverWidget.border": "#dee1e5",
+          "editorHoverWidget.background": "#ffffff"
+        }
+      }
+    },
+    "dark": {
+      "name": "ace-dark",
+      "theme": {
+        "base": "vs-dark",
+        "inherit": true,
+        "rules": [
+          {
+            "token": "",
+            "foreground": "#c4c7cc"
+          },
+          {
+            "token": "keyword",
+            "foreground": "#0f8cff"
+          },
+          {
+            "token": "function",
+            "foreground": "#0f8cff"
+          },
+          {
+            "token": "comment",
+            "foreground": "#747a8a"
+          },
+          {
+            "token": "normal",
+            "foreground": "#c4c7cc"
+          },
+          {
+            "token": "brackets",
+            "foreground": "#c4c7cc"
+          },
+          {
+            "token": "string",
+            "foreground": "#19a96f"
+          },
+          {
+            "token": "variable.builtin",
+            "foreground": "#c36464"
+          },
+          {
+            "token": "identifier",
+            "foreground": "#c4c7cc"
+          },
+          {
+            "token": "number",
+            "foreground": "#da7a43"
+          },
+          {
+            "token": "delimiter",
+            "foreground": "#76b5a5"
+          }
+        ],
+        "colors": {
+          "editor.background": "#0d0e0f",
+          "editor.selectionBackground": "#0f8cff60",
+          "editor.inactiveSelectionBackground": "#0f8cff50",
+          "editor.selectionHighlightBackground": "#0f8cff10",
+          "editor.selectionHighlightBorder": "#0f8cff80",
+          "editor.selectionForeground": "",
+          "editorCursor.foreground": "#0f8cff",
+          "editor.lineHighlightBackground": "#0f8cff20",
+          "editorLineNumber.foreground": "#747a8a",
+          "editorLineNumber.activeForeground": "#aab6c4",
+          "diffEditor.insertedLineBackground": "#1ac98a18",
+          "diffEditor.insertedTextBackground": "#1ac98a30",
+          "diffEditor.removedLineBackground": "#ef6a6a18",
+          "diffEditor.removedTextBackground": "#ef6a6a30",
+          "diffEditorGutter.insertedLineBackground": "#1ac98a20",
+          "diffEditorGutter.removedLineBackground": "#ef6a6a20",
+          "searchEditor.findMatchBackground": "#23252a",
+          "searchEditor.findMatchBorder": "#2d2e34",
+          "searchEditor.textInputBorder": "#34353c",
+          "editorHoverWidget.border": "#34353c",
+          "editorHoverWidget.background": "#0d0e0f"
+        }
+      }
+    }
+  },
+  "protocol": "aicoin://monaco",
+  "extraMonarchAttributes": {
+    "defaultToken": "invalid",
+    "symbols": {
+      "regex": "[=><!~?:&|+\\-*\\/\\^%]+"
+    },
+    "escapes": {
+      "regex": "\\\\(?:[abfnrtv\\\\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})"
+    },
+    "digits": {
+      "regex": "\\d+(_+\\d+)*"
+    }
+  },
+  "editorOptions": {
+    "colorDecorators": true,
+    "fixedOverflowWidgets": true,
+    "fontSize": 14,
+    "formatOnPaste": true,
+    "links": false,
+    "minimap": {
+      "enabled": false
+    },
+    "overviewRulerBorder": false,
+    "overviewRulerLanes": 2,
+    "quickSuggestionsDelay": 100,
+    "renderControlCharacters": false,
+    "renderWhitespace": "none",
+    "scrollBeyondLastLine": false,
+    "tabSize": 2,
+    "wordBasedSuggestions": "currentDocument"
+  },
+  "_runtimeAugmentation": {
+    "note": "The effective Monarch attributes are NOT the static ones above. At editor mount the client rebuilds them from BH plus the server function library. Evidence: renderer/551.js @19343-20114 (setMonarchTokensProvider with rebuilt keywords/operators/builtinVars).",
+    "evidence": "const {keywords, operators, ...rest} = BH; ... setMonarchTokensProvider(ZR, {...rest, keywords: kw, operators: ops, builtinVars: Array.from(new Set([...MC, ...variablesFromFunctionLib]))})"
+  }
+}

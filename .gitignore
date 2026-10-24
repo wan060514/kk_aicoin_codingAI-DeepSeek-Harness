@@ -1,0 +1,18 @@
+node_modules/
+.DS_Store
+*.log
+*.tmp
+
+# 本地运行产物
+data/client-functionLib-*.json
+screenshots/
+shots/
+*.png
+*.jpg
+!docs/**/*.png
+
+# 私人物料：策略脚本与工作区数据不随仓库分发
+aicoin/
+strategies/
+*.local.mjs
+.env

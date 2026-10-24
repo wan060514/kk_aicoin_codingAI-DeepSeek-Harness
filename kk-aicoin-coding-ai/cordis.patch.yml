@@ -1,0 +1,29 @@
+# kk_aicoin_codingAI bundle patch.
+#
+# Inserts ONE row. The row's `disabled` flag (or Settings -> Plugins) is the
+# outer switch; the `enabled` config field is the inner switch.
+#
+# This file is used when the package is installed AS A BUNDLE. If you install it
+# into a profile with an `insert:` row in the profile's own cordis.patch.yml
+# (what install.mjs does), do not also add it as a bundle or you get two rows.
+
+- insert:
+    - id: kk-aicoin-coding-ai
+      name: 'kk_aicoin_codingAI'
+      disabled: false
+      config:
+        # Inner switch: false registers nothing at all.
+        enabled: true
+        # Default output root for specs and delivered strategies. Relative paths
+        # resolve against the HOST process cwd, which is not necessarily your
+        # project root - install.mjs --workspace writes an absolute path so the
+        # plugin works without a per-call override.
+        workspace: '.'
+        # One folder per strategy lives under this name.
+        strategyDir: aicoin-strategies
+        # Advanced: point at a different data/ directory.
+        dataDir: ''
+        # Register the aicoin-strategy-engineer skill.
+        registerSkill: true
+        # Register the short hard-rules system-prompt section.
+        promptSection: true

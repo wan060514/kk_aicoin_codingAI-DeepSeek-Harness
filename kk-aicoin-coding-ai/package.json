@@ -1,0 +1,54 @@
+{
+  "name": "kk_aicoin_codingAI",
+  "version": "1.1.0",
+  "private": true,
+  "description": "量化工程师视角的 AiCoin AiScript 策略助手：需求客观化 → 按客户端函数库生成脚本 → 离线静态自校验与自动 debug → 结构审查与优化建议 → 交付。不提供回测，不产出任何绩效数字。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json",
+    "./validator": "./lib/aiscript/validate.js"
+  },
+  "files": [
+    "lib",
+    "data",
+    "skill",
+    "test",
+    "tools",
+    "research",
+    "cordis.patch.yml",
+    "install.mjs",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node test/validate.test.mjs",
+    "smoke": "node test/smoke.mjs",
+    "build:data": "node tools/build_data.mjs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "aicoin",
+    "aiscript",
+    "quant",
+    "trading-strategy",
+    "indicator",
+    "static-analysis"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.4",
+    "@deepseek-ai/schemastery": "~3.18.4"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    }
+  }
+}

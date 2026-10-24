@@ -1,0 +1,44 @@
+﻿0x0,_0x231477['zD'])(_0x17a0ef(0x50f),async({scriptRef:_0x3f8518,unPush:unPush=![],type:_0x21b468},
+_0x16961a)=>{const _0x315727=_0x17a0ef,
+
+{focusedWindowId:_0x8e04ac,currentTemplateHash:_0x477f75}=_0x16961a['getState']()['chart'];if(_0x8e04ac&&_0x8e04ac!==_0x315727(0x4a1))return{'errMsg':'脚本指标暂不支持在K线新窗口添加','scriptIndicator':null,'unPush':unPush};const {data:_0x56057a}=await _0x405394['A']
+['post']('upgrade/customIndicator/indicator/gen',
+
+{'scriptId':+_0x3f8518,'layoutHash':_0x477f75})
+;console['log'](_0x315727(0x33a),
+
+{'scriptId':+_0x3f8518,'layoutHash':_0x477f75},
+_0x56057a);const {data:_0x55e048,success:_0x7648c3,message:_0x17b460,status:_0x2fd3a6}=_0x56057a;if(!_0x7648c3)return{'errMsg':_0x17b460,'compileResult':_0x55e048?.['compileResult'],'scriptIndicator':null,'unPush':unPush,'status':_0x2fd3a6,'data':_0x55e048};return{'scriptIndicator':_0x55e048['data'],'errMsg':'','unPush':unPush,'status':_0x2fd3a6,'type':_0x21b468};})
+,_0x16bc94=(0x0,_0x231477['zD'])('chart/fetchCoinInfo',async(_0x3dcb21,_0x36db4c)=>{const _0x315c5f=_0x17a0ef,
+
+{cacheCoinInfo:_0x4a7823}=_0x36db4c['getState']()['chart'];if(_0x4a7823[_0x3dcb21]&&Date['now']()-_0x4a7823[_0x3dcb21]
+[_0x315c5f(0x336)]<0x3e8*0x3c)return{'key':_0x3dcb21,'data':{'success':!![],'data':_0x4a7823[_0x3dcb21]}};const {data:_0x3dc196}=await _0x405394['A']
+['post']('market/coin/detail',
+
+{'key':_0x3dcb21})
+;return{'key':_0x3dcb21,'data':{..._0x3dc196,'data':{...(0x0,_0x5089e3['PT'])(_0x3dc196['data']),'updateTime':Date['now']()}}};})
+,_0x40bb50={'currentCoinMeta':{},
+'currentCoinInfo':{},
+'cacheCoinInfo':{},
+'currentPeriod':0x12c,'layouts':[[0x0,0x0,0xc,0xc]],'chartsOptions':{},
+'extraChartsOptions':{},
+'localChartsOptions':{},
+'currentChartTabId':'','chartTabs':[],'mainChartTabVisible':![],'commonChartTabVisible':![],'chartTabPercentVisible':!![],'currentChartInstanceKey':(0x0,_0x3a270f['G4'])(0x0),'formulaList':[],'recommendFormulaList':[],'currentTemplateHash':'','defaultTemplateHash':'','largeOrderExtraSettings':{},
+'aggTradeExtraSettings':{},
+'liquidationMapExtraSettings':{'statPeriodList':['1h','4h','24h']},
+'onchainExtraSettings':{},
+'globalSettings':{..._0x3a270f['wR'],..._0x3a270f['_p']},
+'templateChanged':{},
+'defaultChartOptions':{'symbol':_0xca816b['IG']
+['trade_name'],'period':0x12c,'type':(0x0,_0x3a270f['nF'])(_0xca816b['IG']
+['trade_type'])},
+'chartTradeSettings':{..._0x348aee['e']},
+'chartsSyncOptions':[..._0x36456c['Lh']],'priorChartOptionsKeys':(0x0,_0x36456c['dz'])(_0x36456c['Lh']),'priorExtraChartOptionsKeys':(0x0,_0x36456c['r6'])(_0x36456c['Lh']),'focusedWindowId':'main','focusedWindowState':{},
+'drawingsIdMap':{},
+'indicatorSignal':{'list':[],'config':{}},
+'alertList':{},
+'chartReplayVisible':![],'replayData':{'exchangeList':[],'progressValue':0x0,'posManage':!![],'fund':{'totalFund':0xf4240,'singleFund':0x186a0},
+'currentPosState':_0xca816b['SB']
+[_0x17a0ef(0x503)],'currentSpeed':0x1,'startTime':0x0,'endTime':0x0},
+'delistNoticeData':{'show':![],'link':'','content':'','currentCoinKey':''},
+'delistList':[],'autoOpenAle

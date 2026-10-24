@@ -1,0 +1,36 @@
+﻿:0x3c*0x3c*0x3e8,
+
+[_0x12c9ac['Light']]:0x4e20,
+
+[_0x12c9ac['Now']]:0x1f4};if(Date['now']()-_0x4b04b7<_0x985a3c[_0x1dab2f])return Promise['resolve']();const {data:_0x4db238}=await _0x573d69['A']
+['post']('upgrade/customIndicator/script/list');Array['isArray'](_0x4db238?.['data']?.['customList'])&&(_0x4db238['data']
+['customList']=(0x0,_0x240f6d['G'])(_0x4db238['data']
+['customList']));let _0x33826d;if(_0x4b04b7===0x0&&!_0x3ad870&&_0x4db238['success']){const {customList:_0x584245}=_0x4db238['data'];if(Array[_0x50c9e7(0x2de)](_0x584245)&&_0x584245['length']){const {id:_0x186355,name:_0x7ab8cc,subID:_0x41812f,buildType:_0x1abcad,chartType:_0x33b778}=_0x584245['at'](0x0),_0x3f325c=await _0x573d69['A']
+['post']('upgrade/customIndicator/script/detail',
+
+{'id':_0x186355})
+;if(_0x3f325c['data']
+['success']){const {position:_0x1da15c,..._0x1378a6}=_0x3f325c['data']
+['data'];_0x1378a6[_0x50c9e7(0x6d3)]=_0x1da15c,_0x33826d=_0x1378a6;}else _0x33826d={'id':_0x186355,'name':_0x7ab8cc,'value':_0x3f325c['data']
+['message'],'readonly':!![],'subID':_0x41812f,'buildType':_0x1abcad,'chartType':_0x33b778};}}return{'result':_0x4db238,'initTempIndicator':_0x33826d};})
+,_0x6fac14=(0x0,_0x30cb17['zD'])('indicator/fetchScriptShareTags',async()=>{const {data:_0x3d5d28}=await _0x573d69['A']
+['post']('upgrade/d/indicator/tags');if(_0x3d5d28['success']){}return{'result':_0x3d5d28};})
+,_0x507c97=(0x0,_0x30cb17['zD'])('indicator/addIndicatorStatus',async({id:_0x1a2348,name:_0x4da059,value:_0x1ea803,buildType:_0x508aa5,chartType:_0x4d7b45,visualCode:_0x17fa55,templateId:_0x5753ea,editorDraftId:_0x1eb277,autoSaveUserUid:_0xe21f5b},
+_0x42d665)=>{const _0x515559=_0x80a22c;let _0x5874f7=![];const _0x3c077c={'autoSaveUserUid':_0xe21f5b,'editorDraftId':_0x1eb277,'oid':_0x1a2348,'name':_0x4da059,'value':_0x1ea803,'buildType':_0x508aa5,'chartType':_0x4d7b45,'visualCode':_0x17fa55,'templateId':_0x5753ea},
+_0x5201fd=()=>{const _0x1345a9=a0_0x5024;if(!_0xe21f5b)return;const {user:_0x326ae5}=_0x42d665['getState']();if(!_0x326ae5['auth']||String(_0x326ae5['details']
+[_0x1345a9(0x64a)])!==_0xe21f5b)throw new Error('登录状态已变化，未写入当前账号');};try{_0x5201fd();const {vipStatus:_0x226daf}=_0x42d665[_0x515559(0x231)]()['user'];_0x5874f7=!!(_0x226daf[_0x598d13['BG']
+['CHART_PRO']]||_0x226daf[_0x598d13['BG']
+['SIGNAL']]||_0x226daf[_0x598d13['BG']
+['INDICATOR']]);const _0xf38c8=await _0x573d69['A']
+['post']('upgrade/customIndicator/script/save',
+
+{'name':_0x4da059,'value':_0x1ea803,'version':'v4',..._0x1a2348?{'id':_0x1a2348}:{},
+..._0x508aa5?{'buildType':_0x508aa5}:{},
+..._0x4d7b45?{'position':_0x4d7b45}:{},
+..._0x17fa55&&_0x508aa5==='visual'?{'visualCode':_0x17fa55}:{}})
+;return _0x5201fd(),
+
+{'result':_0xf38c8['data'],..._0x3c077c,'isVip':_0x5874f7};}catch(_0x38ae78){const {message:_0x5b7b73,status:_0x44b573}=_0x430159(_0x38ae78);return _0x42d665['rejectWithValue']({'result':{'success':![],'status':_0x44b573,'message':_0x5b7b73,'data':undefined},
+..._0x3c077c,'isVip':_0x5874f7})
+;}})
+,_0x3f7809=(0x0,_0x30cb17['zD'])('indicator/getIndicato

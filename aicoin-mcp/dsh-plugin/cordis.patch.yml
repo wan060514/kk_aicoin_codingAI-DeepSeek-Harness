@@ -1,0 +1,45 @@
+# dsh-plugin-aicoin-mcp bundle patch.
+#
+# Inserts ONE row. The row's `disabled` flag (or Settings -> Plugins) is the
+# outer switch; the `enabled` config field is the inner switch.
+#
+# The plugin has two halves:
+#   Host   lib/index.js  — spawns node <serverRoot>/src/server.mjs, registers the
+#                          MCP tools as aicoin_*, serves /plugins/aicoin-mcp
+#   Client client.js     — sidebar rail icon + console panel (start/stop the
+#                          bridge, probe/launch/stop AiCoin, live status)
+#
+# If you install this into a profile with an `insert:` row in the profile's own
+# cordis.patch.yml (what install.mjs does), do not also add it as a bundle or you
+# get two rows.
+
+- insert:
+    - id: aicoin-mcp
+      name: 'dsh-plugin-aicoin-mcp'
+      disabled: false
+      config:
+        enabled: true
+        # Absolute path to the aicoin-mcp package root (install.mjs --server
+        # writes it). Relative paths resolve against the HOST process cwd.
+        serverRoot: ''
+        # CDP port the MCP server talks to. Must match the port AiCoin was
+        # launched with (the server passes --remote-debugging-port itself when
+        # it starts AiCoin through aicoin_app_launch).
+        port: 9222
+        # AiCoin.exe location; empty means the server's own default
+        # (D:\Program Files\AiCoin\AiCoin.exe).
+        appPath: ''
+        # Start the MCP server as soon as the plugin loads. false registers only
+        # the diagnostic tool and starts it on first use / from the panel.
+        autoStart: true
+        # Per-call deadline handed to the MCP server.
+        requestTimeoutMs: 120000
+        # Hard cap on registered tools (a provider can refuse an oversized
+        # request; AiCoin's surface stays well under this).
+        maxTools: 64
+        # Capability gate: mutating tools (launch/stop/save, and the panel's
+        # Launch/Stop AiCoin buttons) are refused when this is false.
+        allowMutating: true
+        # Serve the sidebar panel JSON API on /plugins/aicoin-mcp. Set false in a
+        # headless profile: the tools keep working, the panel just 404s.
+        panel: true

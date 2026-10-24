@@ -1,0 +1,188 @@
+{
+  "total": 335,
+  "clean": 280,
+  "errorBuckets": [
+    [
+      "NO_POSITION_STATE :: 脚本有交易指令，但没有任何跨 K 线保持的仓位状态变量（var / varip），也没有读取 strategy.position：脚本无从知道自己是否已经持仓",
+      {
+        "count": 16,
+        "samples": [
+          "enterLong[0] L1: 脚本有交易指令，但没有任何跨 K 线保持的仓位状态变量（var / varip），也没有读取 strategy.position：脚本无从知道自己是否已经持仓",
+          "exitLong[0] L1: 脚本有交易指令，但没有任何跨 K 线保持的仓位状态变量（var / varip），也没有读取 strategy.position：脚本无从知道自己是否已经持仓",
+          "enterShort[0] L1: 脚本有交易指令，但没有任何跨 K 线保持的仓位状态变量（var / varip），也没有读取 strategy.position：脚本无从知道自己是否已经持仓"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: enterLong 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K ",
+      {
+        "count": 1,
+        "samples": [
+          "enterLong[0] L4: enterLong 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: exitLong 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线",
+      {
+        "count": 1,
+        "samples": [
+          "exitLong[0] L3: exitLong 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: enterShort 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K",
+      {
+        "count": 1,
+        "samples": [
+          "enterShort[0] L3: enterShort 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: exitShort 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K ",
+      {
+        "count": 1,
+        "samples": [
+          "exitShort[0] L3: exitShort 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: enterLongAmount 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的",
+      {
+        "count": 1,
+        "samples": [
+          "enterLongAmount[0] L3: enterLongAmount 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: enterLongPercent 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立",
+      {
+        "count": 1,
+        "samples": [
+          "enterLongPercent[0] L3: enterLongPercent 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: exitLongAmount 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每",
+      {
+        "count": 1,
+        "samples": [
+          "exitLongAmount[0] L3: exitLongAmount 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: exitLongPercent 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的",
+      {
+        "count": 1,
+        "samples": [
+          "exitLongPercent[0] L3: exitLongPercent 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: enterShortAmount 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立",
+      {
+        "count": 1,
+        "samples": [
+          "enterShortAmount[0] L3: enterShortAmount 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: enterShortPercent 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成",
+      {
+        "count": 1,
+        "samples": [
+          "enterShortPercent[0] L3: enterShortPercent 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: exitShortAmount 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的",
+      {
+        "count": 1,
+        "samples": [
+          "exitShortAmount[0] L3: exitShortAmount 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ],
+    [
+      "REPEATED_TRADE_RISK :: exitShortPercent 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立",
+      {
+        "count": 1,
+        "samples": [
+          "exitShortPercent[0] L3: exitShortPercent 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量 → 条件成立的每一根 K 线都会重复下单"
+        ]
+      }
+    ]
+  ],
+  "warningBuckets": [
+    [
+      "ARITY_TOO_FEW :: line.new 的可能必要参数未传入：refSeries",
+      {
+        "count": 2,
+        "samples": [
+          "zig[0] L3: line.new 的可能必要参数未传入：refSeries",
+          "zig[0] L7: line.new 的可能必要参数未传入：refSeries"
+        ]
+      }
+    ],
+    [
+      "UNKNOWN_VARIABLE :: 未定义的标识符 \"is_new_day\"：既不是内置变量、函数库条目，也没有在本脚本中声明",
+      {
+        "count": 1,
+        "samples": [
+          "vwap[0] L7: 未定义的标识符 \"is_new_day\"：既不是内置变量、函数库条目，也没有在本脚本中声明"
+        ]
+      }
+    ],
+    [
+      "UNKNOWN_VARIABLE :: 未定义的标识符 \"m\"：既不是内置变量、函数库条目，也没有在本脚本中声明",
+      {
+        "count": 47,
+        "samples": [
+          "matrix_get[0] L1: 未定义的标识符 \"m\"：既不是内置变量、函数库条目，也没有在本脚本中声明",
+          "matrix_set[0] L1: 未定义的标识符 \"m\"：既不是内置变量、函数库条目，也没有在本脚本中声明",
+          "matrix_size[0] L1: 未定义的标识符 \"m\"：既不是内置变量、函数库条目，也没有在本脚本中声明"
+        ]
+      }
+    ],
+    [
+      "UNKNOWN_VARIABLE :: 未定义的标识符 \"m1\"：既不是内置变量、函数库条目，也没有在本脚本中声明",
+      {
+        "count": 6,
+        "samples": [
+          "matrix_concat[0] L1: 未定义的标识符 \"m1\"：既不是内置变量、函数库条目，也没有在本脚本中声明",
+          "matrix_dot[0] L1: 未定义的标识符 \"m1\"：既不是内置变量、函数库条目，也没有在本脚本中声明",
+          "matrix_mult[0] L2: 未定义的标识符 \"m1\"：既不是内置变量、函数库条目，也没有在本脚本中声明"
+        ]
+      }
+    ],
+    [
+      "UNKNOWN_VARIABLE :: 未定义的标识符 \"m2\"：既不是内置变量、函数库条目，也没有在本脚本中声明",
+      {
+        "count": 6,
+        "samples": [
+          "matrix_concat[0] L1: 未定义的标识符 \"m2\"：既不是内置变量、函数库条目，也没有在本脚本中声明",
+          "matrix_dot[0] L1: 未定义的标识符 \"m2\"：既不是内置变量、函数库条目，也没有在本脚本中声明",
+          "matrix_mult[0] L2: 未定义的标识符 \"m2\"：既不是内置变量、函数库条目，也没有在本脚本中声明"
+        ]
+      }
+    ],
+    [
+      "ARITY_TOO_FEW :: label.new 的可能必要参数未传入：title / refSeries",
+      {
+        "count": 1,
+        "samples": [
+          "\"[0] L8: label.new 的可能必要参数未传入：title / refSeries"
+        ]
+      }
+    ]
+  ]
+}

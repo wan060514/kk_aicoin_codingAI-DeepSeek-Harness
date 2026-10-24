@@ -1,0 +1,292 @@
+{
+  "rules": [
+    {
+      "id": "PARSE_ERROR",
+      "severity": "error",
+      "title": "语法错误",
+      "message": "脚本存在无法解析的语法结构，编译器无法继续。",
+      "hint": "检查括号/引号是否成对闭合、语句是否完整；AiScript 语句不以分号结尾，多写分号通常无害但不规范。",
+      "source": "AiScript语言定义.json（languageConfig.brackets / autoClosingPairs）"
+    },
+    {
+      "id": "UNKNOWN_FUNCTION",
+      "severity": "error",
+      "title": "未知函数",
+      "message": "函数 `{name}` 不在 AiScript 函数库中，运行时会报未定义。",
+      "hint": "对照 quick_index.md 或 aiscript_functions.json 核对拼写；注意大小写与下划线（如 array_size、string_tolower、pivothigh）。",
+      "source": "函数库结构化数据.json（334 条，functions 270 条）"
+    },
+    {
+      "id": "UNKNOWN_VARIABLE",
+      "severity": "warning",
+      "title": "未知变量",
+      "message": "变量 `{name}` 在使用前没有声明或赋值。",
+      "hint": "先用 `=` 赋值再引用；行情内置变量见 aiscript_language.json 的 builtinVars 与「行情数据」分类。",
+      "source": "AiScript语言定义.json builtinVars + 函数库「行情数据」分类（25 条 variable）"
+    },
+    {
+      "id": "ARITY_TOO_FEW",
+      "severity": "error",
+      "title": "参数过少",
+      "message": "`{name}` 至少需要 {minArgs} 个参数，当前只传了 {actual} 个。",
+      "hint": "查看该条目的 params 中 required=true 的项；label.new/line.new/box.new 的第一个坐标参数是一个数组，如 [time, high]。",
+      "source": "函数库结构化数据.json 各条目 params[].default === \"(必要参数)\""
+    },
+    {
+      "id": "ARITY_TOO_MANY",
+      "severity": "error",
+      "title": "参数过多",
+      "message": "`{name}` 最多接受 {maxArgs} 个参数，当前传了 {actual} 个。",
+      "hint": "maxArgs 为 null 表示可变参数（如 max/min/avg/string_format），可传任意多个。",
+      "source": "函数库结构化数据.json 各条目 signature 与 params 数量"
+    },
+    {
+      "id": "UNKNOWN_NAMED_ARG",
+      "severity": "error",
+      "title": "未知命名参数",
+      "message": "`{name}` 没有名为 `{arg}` 的命名参数。",
+      "hint": "命名参数只能用该条目 params[].name 中列出的名字，漏写会退化成位置参数导致错位。",
+      "source": "函数库结构化数据.json 各条目 params[].name"
+    },
+    {
+      "id": "DUPLICATE_NAMED_ARG",
+      "severity": "error",
+      "title": "命名参数重复",
+      "message": "同一调用里命名参数 `{arg}` 出现了多次。",
+      "hint": "删除重复项；位置参数与命名参数混用时，位置参数必须全部排在命名参数之前。",
+      "source": "函数库结构化数据.json 各条目 params[].name"
+    },
+    {
+      "id": "NAMED_ARG_CASE",
+      "severity": "error",
+      "title": "命名参数大小写不匹配",
+      "message": "命名参数 `{arg}` 大小写不正确，应为 `{expected}`。",
+      "hint": "命名参数大小写敏感：lineWidth 必须驼峰，写成 linewidth / LineWidth 会报错。",
+      "source": "README 已知坑 1；函数库结构化数据.json 各条目 params[].name"
+    },
+    {
+      "id": "SINGLE_DECLARATION",
+      "severity": "error",
+      "title": "交易指令重复声明",
+      "message": "`{name}` 每种指令最多只能声明一次，重复声明会产生编译错误。",
+      "hint": "需要多次下单请改用 *Amount / *Percent 系列（必须带唯一 id）。",
+      "source": "README 已知坑 2；函数库条目 enterLong / exitLong / enterShort / exitShort"
+    },
+    {
+      "id": "ROOT_SCOPE_REQUIRED",
+      "severity": "error",
+      "title": "必须在根作用域调用",
+      "message": "`{name}` 必须在根作用域调用，不能放在 if / for 等代码块内。",
+      "hint": "把调用移到最外层，用第一个 cond 参数控制是否触发；例如 enterLong(cond, ...) 而不是 if (cond) { enterLong(...) }。",
+      "source": "README 已知坑 3；函数库条目 label / line / box / enterLong 等（flags.rootScopeOnly）"
+    },
+    {
+      "id": "FOR_LOOP_LIMIT",
+      "severity": "error",
+      "title": "for 循环超出上限",
+      "message": "for 循环单次迭代超过 {limit} 次会报错。",
+      "hint": "把循环上限压到 500 以内，或改用 range / array_* 系列函数批量处理。",
+      "source": "README 已知坑 4；aiscript_language.json limits.forLoopMaxIterations = 500"
+    },
+    {
+      "id": "HISTORY_LOOKBACK_LIMIT",
+      "severity": "error",
+      "title": "历史引用超出上限",
+      "message": "`[]` 最多只能回溯最近 {limit} 个数据点，当前为 {actual}。",
+      "hint": "缩短回溯长度，或改用 highest/lowest/valuewhen 等函数间接取历史。",
+      "source": "README 已知坑 5；aiscript_language.json historyRef.maxLookback = 500"
+    },
+    {
+      "id": "INDEX_LENGTH_LIMIT",
+      "severity": "error",
+      "title": "下标超出上限",
+      "message": "`{}` 的数组/字典最大长度为 {limit}，下标从 0 开始。",
+      "hint": "减小容器长度，或分片处理。",
+      "source": "README 已知坑 6；aiscript_language.json indexRef.maxLength = 1000"
+    },
+    {
+      "id": "INDEX_ON_NON_COLLECTION",
+      "severity": "error",
+      "title": "下标运算符用错对象",
+      "message": "`{}` 只能用于数组/字典，历史 K 线取值请用 `[]`。",
+      "hint": "`[]` 取历史 K 线值（close[1]），`{}` 取数组/字典下标（arr{0}），两者是不同的运算符。",
+      "source": "README 已知坑 7；函数库「引用运算符」条目 [ ] 与 { }"
+    },
+    {
+      "id": "CONFIG_ONCE",
+      "severity": "warning",
+      "title": "配置函数重复调用",
+      "message": "`{name}` 只能设置一次，重复调用不会生效。",
+      "hint": "indicator / tradeConfig 各脚本只保留一处调用。",
+      "source": "函数库条目 indicator（用于设置显示的精度，只能设置一次）、tradeConfig（只能设置一次）"
+    },
+    {
+      "id": "CONFIG_NOT_AT_TOP",
+      "severity": "warning",
+      "title": "配置函数位置不当",
+      "message": "`{name}` 属于配置函数，应放在脚本顶部（版本声明之后、其他语句之前）。",
+      "hint": "把 indicator(...) / tradeConfig(...) 上移到 // @version=2 之后的第一段。",
+      "source": "函数库「配置函数」分类（indicator / tradeConfig）"
+    },
+    {
+      "id": "MISSING_UNIQUE_ID",
+      "severity": "error",
+      "title": "缺少唯一 id",
+      "message": "`{name}` 必须传入唯一的 id 参数作为订单标识符。",
+      "hint": "补上 id，例如 enterLongAmount(cond, id=\"long_buy\", price=\"market\", amount=100)。",
+      "source": "函数库条目 enterLongAmount 等（id为唯一标识符，不可重复）；flags.requiresUniqueId"
+    },
+    {
+      "id": "DUPLICATE_TRADE_ID",
+      "severity": "error",
+      "title": "交易 id 重复",
+      "message": "交易声明的 id `{id}` 重复，同一脚本内 id 必须唯一。",
+      "hint": "给每个 *Amount / *Percent 调用换一个语义化且唯一的 id。",
+      "source": "函数库条目 enterLongAmount / enterShortAmount / exitLongAmount / exitShortAmount 的 id 参数说明"
+    },
+    {
+      "id": "ASSIGN_IN_BLOCK_SHADOWS",
+      "severity": "warning",
+      "title": "块内赋值遮蔽/丢失",
+      "message": "在 if / for 块内对块外变量赋值，语义容易与预期不符。",
+      "hint": "`var` 只在第一根 K 线初始化；`varip` 在实时 K 线内也会持续更新。需要跨 K 线保持状态请显式使用 var / varip。",
+      "source": "README 已知坑 8；函数库条目 var / varip"
+    },
+    {
+      "id": "TYPE_HINT_MISMATCH",
+      "severity": "warning",
+      "title": "类型不匹配",
+      "message": "`{name}` 的第 {index} 个参数期望 {expected}，实际传入 {actual}。",
+      "hint": "参考 params[].type；需要转换时用 int() / float() / string() / bool()（见「数据类型」分类）。",
+      "source": "函数库结构化数据.json 各条目 params[].type；函数库「数据类型」分类（int/float/string/bool 等）"
+    },
+    {
+      "id": "TERNARY_TYPE_MISMATCH",
+      "severity": "warning",
+      "title": "三元表达式分支类型不一致",
+      "message": "三元表达式（?: / iff）两个分支的返回类型不一致。",
+      "hint": "让两个分支返回同类型；需要缺省值时用 nz() 或 na() 判断后再取值。",
+      "source": "函数库条目 iff（三元运算）、?:（条件表达式）"
+    },
+    {
+      "id": "REQUIRE_CONDITION_FIRST_ARG",
+      "severity": "error",
+      "title": "第一个参数必须是布尔条件",
+      "message": "`{name}` 的第一个参数 cond 必须是布尔系列条件。",
+      "hint": "写成 plotText(close < open, ...) / plotShape(crossup(close, ma(close,20)), ...)，不要把数值序列当条件。",
+      "source": "函数库条目 plotText / plotShape 的 cond 参数说明（是否进行绘制的bool系列）；flags.conditionFirstParam"
+    },
+    {
+      "id": "UNUSED_VARIABLE",
+      "severity": "info",
+      "title": "未使用的变量",
+      "message": "变量 `{name}` 被赋值但从未使用。",
+      "hint": "删除无用赋值，或确认是否漏掉了绘图 / 交易调用。",
+      "source": "AIScript 语言定义（变量声明与作用域）"
+    },
+    {
+      "id": "NAN_COMPARISON",
+      "severity": "warning",
+      "title": "NaN 比较写法可疑",
+      "message": "与 nan 直接比较（== nan / != nan）不会得到预期结果。",
+      "hint": "用 na(x) 判断是否为 NaN，用 nz(x, fallback) 提供缺省值。",
+      "source": "函数库条目 na（判断数值是否为 NaN）、nz、nan（数据类型）"
+    },
+    {
+      "id": "SUSPICIOUS_DIVISION",
+      "severity": "warning",
+      "title": "可疑的除法",
+      "message": "除法运算的除数可能为 0 或为字面量 0。",
+      "hint": "先用 nz(divisor, 1) 兜底，或加条件判断后再相除。",
+      "source": "函数库「算术运算符」条目 /；函数库条目 nz"
+    },
+    {
+      "id": "TRAILING_SEMICOLON_OK",
+      "severity": "info",
+      "title": "行尾分号",
+      "message": "AiScript 语句以换行结束，行尾分号会被忽略，不影响编译。",
+      "hint": "无需修改；函数库 snippet 模板本身也带分号，可直接粘贴。",
+      "source": "函数库结构化数据.json 各条目 snippet（普遍以分号结尾）"
+    },
+    {
+      "id": "NO_PLOT_OUTPUT",
+      "severity": "warning",
+      "title": "没有任何绘图输出",
+      "message": "指标脚本没有任何 plot / plot* / label / line / box 输出，运行时图表上是空白的。",
+      "hint": "至少调用一次 plot(series, title=..., color=...) 或 plotColumn / plotHist / plotCandle 等。",
+      "source": "函数库「画图函数」分类（plot / plotColumn / plotHist / plotCandle / plotOhlc / plotText / plotShape / label / line / box / fill 等 12 条）"
+    },
+    {
+      "id": "NO_TRADE_SIGNAL",
+      "severity": "warning",
+      "title": "没有任何交易指令",
+      "message": "脚本声明了交易配置，但没有任何 enterLong / enterShort / exit* 交易指令。",
+      "hint": "补上交易指令，或删除无用的 tradeConfig。",
+      "source": "函数库「交易函数」分类（14 条）"
+    },
+    {
+      "id": "MISSING_VERSION_DIRECTIVE",
+      "severity": "warning",
+      "title": "缺少版本声明",
+      "message": "脚本开头缺少 `// @version=2` 版本声明。",
+      "hint": "在脚本第一行写 // @version=2；函数库绝大多数条目都要求语法版本 2。",
+      "source": "函数库 doc_markdown「语法版本需要 // @version=2」；aiscript_language.json versionDirective"
+    },
+    {
+      "id": "NO_POSITION_STATE",
+      "severity": "error",
+      "title": "没有记录仓位状态",
+      "message": "脚本里有交易指令，但没有任何跨 K 线保持的仓位状态变量（var/varip），也没有读取 strategy.position。",
+      "hint": "至少声明一个状态变量，例如 var in_long = false，并在开仓/平仓分支里用 := 更新它；否则脚本无从知道自己是否已有持仓。",
+      "source": "函数库「数据类型」条目 var/varip（跨 K 线保持）；函数库条目 strategy.position（获取当前策略持仓）"
+    },
+    {
+      "id": "REPEATED_TRADE_RISK",
+      "severity": "error",
+      "title": "下单条件会重复触发",
+      "message": "交易指令 `{name}` 的触发条件既不是边沿信号（crossup / crossdown / rising / falling），也没有引用任何仓位状态变量。",
+      "hint": "条件每根 K 线都成立时会重复下单。改成「边沿信号 + 状态保护」，例如 crossup(fast, slow) and not in_long，并在平仓后把状态复位。",
+      "source": "函数库条目 crossup / crossdown / rising / falling（边沿判断）；交易函数 cond 参数说明"
+    },
+    {
+      "id": "STATE_NEVER_RESET",
+      "severity": "warning",
+      "title": "状态变量只置位未复位",
+      "message": "状态变量 `{name}` 被赋值为 true，但脚本里从未被赋值为 false。",
+      "hint": "状态机必须能回到空仓：在平仓分支里写 {name} := false，否则平仓后会一直认为自己仍持仓。",
+      "source": "函数库「数据类型」条目 var；仓位状态机通用要求"
+    },
+    {
+      "id": "EXIT_WITHOUT_ENTRY_RECORD",
+      "severity": "warning",
+      "title": "止盈止损没有记录入场价",
+      "message": "出场条件按百分比或价格比例计算，但脚本既没有读取 strategy.position 的持仓均价，也没有用变量记录入场价。",
+      "hint": "开仓分支里记 entry_price := close（或读 strategy.position 的 long_price / short_price），止盈止损都基于这个记录值计算。",
+      "source": "函数库条目 strategy.position（long_price / short_price）；交易函数 cond 参数说明"
+    },
+    {
+      "id": "NO_ENTRY_BAR_RECORD",
+      "severity": "info",
+      "title": "没有记录入场 K 线",
+      "message": "脚本没有记录开仓发生在哪一根 K 线，因此无法实现时间止损、最长持仓或平仓后冷却。",
+      "hint": "开仓分支里记 entry_bar := bar_index，之后可用 bar_index - entry_bar >= N 做时间止损或冷却。",
+      "source": "AiScript 内置变量 bar_index；仓位状态机通用要求"
+    },
+    {
+      "id": "TIME_IS_FLOAT",
+      "severity": "error",
+      "title": "time 是浮点，声明成 int 会编译失败",
+      "message": "`var int <name> = time` 在客户端会被服务端编译器拒绝：cannot use float as type int in assignment。",
+      "hint": "把 int 改成 float（`var float t0 = time`），或去掉类型让它自动推导（`var t0 = time`）。",
+      "source": "真机实测 2026-10-24：AiCoin 2.16.29 保存接口返回 data.compileResult.err = \"第 2 行第 8 列：cannot use float as type int in assignment\""
+    },
+    {
+      "id": "DISPLAY_NON_CONSTANT",
+      "severity": "warning",
+      "title": "display 只认字面量布尔",
+      "message": "drawing 函数的 display 参数只认 true/false；传序列（barstate.islast、a and b 等）在客户端不报错，但整组绘图一个都不显示。",
+      "hint": "要做「只画最新一根」用几何门控：非最新根让线的 x1 == x2（零长度不可见），标签用空文本 + 透明底色。",
+      "source": "真机二分探针 2026-10-24：A=display 常量 true（画出）、B=display 序列（无输出），同一脚本同屏对照"
+    }
+  ]
+}

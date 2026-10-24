@@ -1,0 +1,44 @@
+{
+  "name": "aicoin-mcp",
+  "version": "0.5.0",
+  "description": "零依赖 MCP 服务器 + DeepSeek Harness 插件：通过 Chrome DevTools Protocol 驱动 AiCoin 桌面客户端（Electron），并在 Harness 首页侧栏提供控制台面板",
+  "type": "module",
+  "main": "src/server.mjs",
+  "bin": {
+    "aicoin-mcp": "src/server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node test/run.mjs",
+    "start": "node src/server.mjs",
+    "smoke:panel": "node scripts/panel-api-smoke.mjs",
+    "smoke:client": "node scripts/client-smoke.mjs",
+    "smoke:bridge": "node scripts/bridge-selftest.mjs",
+    "install-plugin": "node install.mjs --enable --run-pnpm",
+    "smoke:opendata": "node scripts/opendata-smoke.mjs",
+    "e2e:opendata": "node scripts/opendata-e2e.mjs",
+    "selftest:resync": "node scripts/resync-selftest.mjs"
+  },
+  "files": [
+    "src",
+    "dsh-plugin",
+    "scripts",
+    "docs",
+    "README.md",
+    "INSTALL.md",
+    "install.mjs"
+  ],
+  "keywords": [
+    "mcp",
+    "cdp",
+    "aicoin",
+    "electron",
+    "model-context-protocol",
+    "dsh-plugin",
+    "deepseek-harness"
+  ],
+  "license": "MIT",
+  "private": true
+}

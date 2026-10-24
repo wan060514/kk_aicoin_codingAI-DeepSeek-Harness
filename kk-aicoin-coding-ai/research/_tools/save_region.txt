@@ -1,0 +1,71 @@
+﻿559(0x231)]()['user'];_0x5874f7=!!(_0x226daf[_0x598d13['BG']
+['CHART_PRO']]||_0x226daf[_0x598d13['BG']
+['SIGNAL']]||_0x226daf[_0x598d13['BG']
+['INDICATOR']]);const _0xf38c8=await _0x573d69['A']
+['post']('upgrade/customIndicator/script/save',
+
+{'name':_0x4da059,'value':_0x1ea803,'version':'v4',..._0x1a2348?{'id':_0x1a2348}:{},
+..._0x508aa5?{'buildType':_0x508aa5}:{},
+..._0x4d7b45?{'position':_0x4d7b45}:{},
+..._0x17fa55&&_0x508aa5==='visual'?{'visualCode':_0x17fa55}:{}})
+;return _0x5201fd(),
+
+{'result':_0xf38c8['data'],..._0x3c077c,'isVip':_0x5874f7};}catch(_0x38ae78){const {message:_0x5b7b73,status:_0x44b573}=_0x430159(_0x38ae78);return _0x42d665['rejectWithValue']({'result':{'success':![],'status':_0x44b573,'message':_0x5b7b73,'data':undefined},
+..._0x3c077c,'isVip':_0x5874f7})
+;}})
+,_0x3f7809=(0x0,_0x30cb17['zD'])('indicator/getIndicatorDetailStatus',async(_0x1a84c4,_0x4eaa9b)=>{const _0x128073=_0x80a22c,
+
+{scriptDetails:_0x408301}=_0x4eaa9b['getState']()['indicators'],_0x5eae38=_0x408301[_0x128073(0x46b)](_0x8ba7d=>+_0x8ba7d['id']===+_0x1a84c4);if(_0x5eae38)return Promise['resolve']({'success':!![],'status':0xc8,'message':'','data':_0x5eae38})
+;const {data:_0x42da4b}=await _0x573d69['A']
+[_0x128073(0x22e)]('upgrade/customIndicator/script/detail',
+
+{'id':+_0x1a84c4})
+;return _0x42da4b;})
+,_0x3c3e09=(0x0,_0x30cb17['zD'])('indicator/getScriptTemplates',async(_0x39d4b4,_0x1ac5e8)=>{const {shouldUpdateTemplate:_0x1d2799,scriptTemplates:_0x52c64c}=_0x1ac5e8['getState']()['indicators'];if(!_0x1d2799)return Promise['resolve']({'scriptTemplates':_0x52c64c,'source':'cache'})
+;const {data:_0x3b1938}=await _0x573d69['A']
+['post']('upgrade/customIndicator/script/template',
+
+{'version':'v2'})
+;if(_0x3b1938['success']){const {sourceList:_0x20b458,visualList:_0x3779ea}=_0x3b1938['data'],_0x5646fa=_0x58d76a=>_0x58d76a['map'](({position:_0xe98cdd,title:_0x44375f,..._0x1ac833})
+=>({'chartType':_0xe98cdd,'name':_0x44375f,..._0x1ac833})
+);return{'scriptTemplates':{'source':_0x5646fa(_0x20b458),'visual':_0x5646fa(_0x3779ea)},
+'source':'fetch'};}return undefined;})
+,_0x3b1768=(0x0,_0x30cb17['zD'])('indicator/getVisualEditConfig',async(_0x4d1e55,_0x49044d)=>{const _0x447320=_0x80a22c,
+
+{updateVisualEditConfigAt:_0x5b6125}=_0x49044d[_0x447320(0x231)]()['indicators'];if(Date['now']()-_0x5b6125<0x3c*0x3c*0x3e8)return Promise['resolve']();const {data:_0x2811b7}=await _0x573d69['A']
+['post']('upgrade/customIndicator/script/dataConfig');return _0x2811b7;})
+,_0x49d9ca=(0x0,_0x30cb17['zD'])('indicator/fetchFunctionLibraryStatus',async(_0x4deb8d,_0x2f4188)=>{const _0x19cd59=_0x80a22c,
+
+{functionLibrary:_0x233768}=_0x2f4188['getState']()[_0x19cd59(0x3f4)];if(_0x233768['length'])return Promise['resolve']();const {data:_0x2b539c}=await _0x573d69['A']
+['post']('upgrade/customIndicator/script/functionLib');return _0x2b539c;})
+,_0x3fec4c=(0x0,_0x30cb17['zD'])('indicator/fetchScriptIndicDetails',async _0x54a09d=>{if(!_0x54a09d['length'])return null;const {data:_0x490ada}=await _0x573d69['A']
+['post']('upgrade/customIndicator/indicator/config',
+
+{'indicatorIds':_0x54a09d['map'](_0x4ff93d['KV'])})
+;return _0x490ada;})
+,_0x3c6d2a=(0x0,_0x30cb17['zD'])('indicator/fetchPublicScriptIndicDetails',async _0x42a654=>{const _0x54dd5e=_0x80a22c;if(!_0x42a654[_0x54dd5e(0x349)])return null;const {data:_0x537594}=await _0x573d69['A']
+[_0x54dd5e(0x22e)]('upgrade/customIndicator/public-indicator/config',
+
+{'publicScriptKeys':_0x42a654})
+;return _0x537594;})
+,_0x247477=(0x0,_0x30cb17['zD'])('indicator/fetchTradingConfig',async({sid:_0x223eab,isTemplate:isTemplate=0x0})
+=>{const _0x319d90=await(0x0,_0x5a2f4f['yI'])({'scriptId':Number['isNaN'](+_0x223eab)?_0x223eab:+_0x223eab,'isTemplate':isTemplate})
+;return{'result':_0x319d90['data'],'sid':_0x223eab};})
+,_0x4f1b49=(0x0,_0x30cb17['zD'])('indicator/fetchIndicatorTradingList',async({type:_0x2f1dc1,isPartial:_0x507b31},
+
+{signal:_0x5ad83a})
+=>{const _0x2a7e40=await(0x0,_0x455700['A'])({'type':_0x2f1dc1,'isPartial':_0x507b31,'signal':_0x5ad83a})
+;return{'result':_0x2a7e40,'type':_0x2f1dc1,'isPartial':_0x507b31};})
+,_0x6a1aae=(0x0,_0x30cb17['zD'])('indicator/updateSignalStrategyStatus',async _0x42234b=>{const {deferGoneConvergence:_0x283bca,..._0x3c7ae0}=_0x42234b,_0x5c5112=await(0x0,_0x5a2f4f['xm'])(_0x3c7ae0);return{'result':_0x5c5112['data'],'params':_0x42234b};})
+,_0x548c4f=(0x0,_0x30cb17['zD'])('indicator/updateSignalStrategyConfig',async _0x1b6982=>{const _0x5efdfa=_0x80a22c,_0x441c40=await _0x573d69['A']
+['post'](_0x5efdfa(0x5ff),_0x1b6982);return{'result':_0x441c40['data'],'params':_0x1b6982};})
+,_0x463c9a=(0x0,_0x30cb17['zD'])('indicator/deleteIndicatorTradingConfig',async({hash:_0x205dd9})
+=>{const _0x1efd73=await _0x573d69['A']
+['post']('upgrade/customIndicator/trade/del',
+
+{'hash':_0x205dd9})
+;return{'result':_0x1efd73['data'],'hash':_0x205dd9};})
+,_0x3ac2e7=(0x0,_0x30cb17['zD'])(_0x80a22c(0x2d1),async()=>{const _0x51f2a1=_0x80a22c,_0x47fda0=await _0x573d69['A']
+[_0x51f2a1(0x22e)]('upgrade/scriptCommunity/myIndicators');return{'result':_0x47fda0['data']};})
+,_0x467a43={'base':'upgrade/backtest/execTask','deep':_0x80a22c(0x443),'random':'upgrade/backtest/execRandomTask'},
+_0x502065=(0x0,_0x30cb17['zD'])('indicator/execBacktestTask',async _0xa70718=>{const _0x4e84ad=_0x80a

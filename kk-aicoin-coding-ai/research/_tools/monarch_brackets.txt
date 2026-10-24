@@ -1,0 +1,2 @@
+﻿[file] C:\Users\11\Desktop\AiScript编辑器架构与函数库\aicoin_dist\extracted\dist\renderer\1407.js  len=4948790
+[needle] "@brackets token returned"  occurrences=0

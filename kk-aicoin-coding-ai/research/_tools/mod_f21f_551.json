@@ -1,0 +1,744 @@
+{
+  "BH": {
+    "defaultToken": "invalid",
+    "keywords": [
+      "and",
+      "any",
+      "bool",
+      "break",
+      "class",
+      "dict",
+      "else",
+      "false",
+      "finally",
+      "float",
+      "for",
+      "if",
+      "iff",
+      "int",
+      "nan",
+      "not",
+      "or",
+      "range",
+      "return",
+      "string",
+      "true",
+      "var",
+      "varip"
+    ],
+    "operators": [
+      "<=",
+      ">=",
+      "==",
+      "!=",
+      "+",
+      "-",
+      "*",
+      "/",
+      "%",
+      "++",
+      "--",
+      "^",
+      "!",
+      "&&",
+      "||",
+      "?",
+      ":",
+      "=",
+      "+=",
+      "-=",
+      "*=",
+      "/=",
+      "%=",
+      "^="
+    ],
+    "builtinVars": [
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume",
+      "amount",
+      "time",
+      "timenow",
+      "timestart",
+      "timeend",
+      "bar_index",
+      "syminfo"
+    ],
+    "symbols": {
+      "__regex": "[=><!~?:&|+\\-*\\/\\^%]+",
+      "__flags": ""
+    },
+    "escapes": {
+      "__regex": "\\\\(?:[abfnrtv\\\\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})",
+      "__flags": ""
+    },
+    "digits": {
+      "__regex": "\\d+(_+\\d+)*",
+      "__flags": ""
+    },
+    "tokenizer": {
+      "root": [
+        [
+          {
+            "__regex": "[{}]",
+            "__flags": ""
+          },
+          "delimiter.bracket"
+        ],
+        {
+          "include": "common"
+        }
+      ],
+      "common": [
+        [
+          {
+            "__regex": "(?!if|for|while|switch|return)([a-zA-Z\\u4E00-\\u9FAF_$][0-9a-zA-Z\\u4E00-\\u9FAF_$]*)(\\s*)(\\()",
+            "__flags": ""
+          },
+          [
+            "function",
+            "",
+            "@brackets"
+          ]
+        ],
+        [
+          {
+            "__regex": "#?[a-z_$][\\w$]*",
+            "__flags": ""
+          },
+          {
+            "cases": {
+              "@keywords": "keyword",
+              "@builtinVars": "variable.builtin",
+              "@default": "identifier"
+            }
+          }
+        ],
+        [
+          {
+            "__regex": "[A-Z][\\w\\$]*",
+            "__flags": ""
+          },
+          "type.identifier"
+        ],
+        {
+          "include": "@whitespace"
+        },
+        [
+          {
+            "__regex": "[()\\[\\]]",
+            "__flags": ""
+          },
+          "@brackets"
+        ],
+        [
+          {
+            "__regex": "[<>](?!@symbols)",
+            "__flags": ""
+          },
+          "@brackets"
+        ],
+        [
+          {
+            "__regex": "!(?=([^=]|$))",
+            "__flags": ""
+          },
+          "delimiter"
+        ],
+        [
+          {
+            "__regex": "@symbols",
+            "__flags": ""
+          },
+          {
+            "cases": {
+              "@operators": "delimiter",
+              "@default": ""
+            }
+          }
+        ],
+        [
+          {
+            "__regex": "(@digits)[eE]([\\-+]?(@digits))?",
+            "__flags": ""
+          },
+          "number.float"
+        ],
+        [
+          {
+            "__regex": "(@digits)\\.(@digits)([eE][\\-+]?(@digits))?",
+            "__flags": ""
+          },
+          "number.float"
+        ],
+        [
+          {
+            "__regex": "(@digits)n?",
+            "__flags": ""
+          },
+          "number"
+        ],
+        [
+          {
+            "__regex": "[;,.]",
+            "__flags": ""
+          },
+          "delimiter"
+        ],
+        [
+          {
+            "__regex": "\"([^\"\\\\]|\\\\.)*$",
+            "__flags": ""
+          },
+          "string.invalid"
+        ],
+        [
+          {
+            "__regex": "'([^'\\\\]|\\\\.)*$",
+            "__flags": ""
+          },
+          "string.invalid"
+        ],
+        [
+          {
+            "__regex": "\"",
+            "__flags": ""
+          },
+          "string",
+          "@string_double"
+        ],
+        [
+          {
+            "__regex": "'",
+            "__flags": ""
+          },
+          "string",
+          "@string_single"
+        ]
+      ],
+      "whitespace": [
+        [
+          {
+            "__regex": "[ \\t\\r\\n]+",
+            "__flags": ""
+          },
+          ""
+        ],
+        [
+          {
+            "__regex": "\\/\\*\\*(?!\\/)",
+            "__flags": ""
+          },
+          "comment.doc",
+          "@jsdoc"
+        ],
+        [
+          {
+            "__regex": "\\/\\*",
+            "__flags": ""
+          },
+          "comment",
+          "@comment"
+        ],
+        [
+          {
+            "__regex": "\\/\\/.*$",
+            "__flags": ""
+          },
+          "comment"
+        ]
+      ],
+      "comment": [
+        [
+          {
+            "__regex": "[^\\/*]+",
+            "__flags": ""
+          },
+          "comment"
+        ],
+        [
+          {
+            "__regex": "\\*\\/",
+            "__flags": ""
+          },
+          "comment",
+          "@pop"
+        ],
+        [
+          {
+            "__regex": "[\\/*]",
+            "__flags": ""
+          },
+          "comment"
+        ]
+      ],
+      "jsdoc": [
+        [
+          {
+            "__regex": "[^\\/*]+",
+            "__flags": ""
+          },
+          "comment.doc"
+        ],
+        [
+          {
+            "__regex": "\\*\\/",
+            "__flags": ""
+          },
+          "comment.doc",
+          "@pop"
+        ],
+        [
+          {
+            "__regex": "[\\/*]",
+            "__flags": ""
+          },
+          "comment.doc"
+        ]
+      ],
+      "string_double": [
+        [
+          {
+            "__regex": "[^\\\\\"]+",
+            "__flags": ""
+          },
+          "string"
+        ],
+        [
+          {
+            "__regex": "@escapes",
+            "__flags": ""
+          },
+          "string.escape"
+        ],
+        [
+          {
+            "__regex": "\\\\.",
+            "__flags": ""
+          },
+          "string.escape.invalid"
+        ],
+        [
+          {
+            "__regex": "\"",
+            "__flags": ""
+          },
+          "string",
+          "@pop"
+        ]
+      ],
+      "string_single": [
+        [
+          {
+            "__regex": "[^\\\\']+",
+            "__flags": ""
+          },
+          "string"
+        ],
+        [
+          {
+            "__regex": "@escapes",
+            "__flags": ""
+          },
+          "string.escape"
+        ],
+        [
+          {
+            "__regex": "\\\\.",
+            "__flags": ""
+          },
+          "string.escape.invalid"
+        ],
+        [
+          {
+            "__regex": "'",
+            "__flags": ""
+          },
+          "string",
+          "@pop"
+        ]
+      ],
+      "bracketCounting": [
+        [
+          {
+            "__regex": "\\{",
+            "__flags": ""
+          },
+          "delimiter.bracket",
+          "@bracketCounting"
+        ],
+        [
+          {
+            "__regex": "\\}",
+            "__flags": ""
+          },
+          "delimiter.bracket",
+          "@pop"
+        ],
+        {
+          "include": "common"
+        }
+      ]
+    }
+  },
+  "Bt": "ace-dark",
+  "HL": [
+    "and",
+    "any",
+    "bool",
+    "break",
+    "class",
+    "dict",
+    "else",
+    "false",
+    "finally",
+    "float",
+    "for",
+    "if",
+    "iff",
+    "int",
+    "nan",
+    "not",
+    "or",
+    "range",
+    "return",
+    "string",
+    "true",
+    "var",
+    "varip"
+  ],
+  "LH": "aicoin://monaco",
+  "MC": [
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "amount",
+    "time",
+    "timenow",
+    "timestart",
+    "timeend",
+    "bar_index",
+    "syminfo"
+  ],
+  "SB": [
+    "<=",
+    ">=",
+    "==",
+    "!=",
+    "+",
+    "-",
+    "*",
+    "/",
+    "%",
+    "++",
+    "--",
+    "^",
+    "!",
+    "&&",
+    "||",
+    "?",
+    ":",
+    "=",
+    "+=",
+    "-=",
+    "*=",
+    "/=",
+    "%=",
+    "^="
+  ],
+  "ZR": "AIScript",
+  "Zm": {
+    "base": "vs",
+    "inherit": true,
+    "rules": [
+      {
+        "token": "",
+        "foreground": "#5c6773"
+      },
+      {
+        "token": "keyword",
+        "foreground": "#0f8cff"
+      },
+      {
+        "token": "function",
+        "foreground": "#0f8cff"
+      },
+      {
+        "token": "comment",
+        "foreground": "#8c96a3"
+      },
+      {
+        "token": "normal",
+        "foreground": "#001734"
+      },
+      {
+        "token": "brackets",
+        "foreground": "#001734"
+      },
+      {
+        "token": "string",
+        "foreground": "#00b883"
+      },
+      {
+        "token": "variable.builtin",
+        "foreground": "#bb5c4e"
+      },
+      {
+        "token": "identifier",
+        "foreground": "#001734"
+      },
+      {
+        "token": "number",
+        "foreground": "#dd8c42"
+      },
+      {
+        "token": "delimiter",
+        "foreground": "#6aa998"
+      }
+    ],
+    "colors": {
+      "editor.background": "#ffffff",
+      "editor.selectionBackground": "#0f8cff60",
+      "editor.inactiveSelectionBackground": "#0f8cff50",
+      "editor.selectionHighlightBackground": "#0f8cff10",
+      "editor.selectionHighlightBorder": "#0f8cff80",
+      "editorCursor.foreground": "#0f8cff",
+      "editor.lineHighlightBackground": "#0f8cff20",
+      "editorLineNumber.foreground": "#bfc5cc",
+      "editorLineNumber.activeForeground": "#59677b",
+      "diffEditor.insertedLineBackground": "#17a67312",
+      "diffEditor.insertedTextBackground": "#17a67324",
+      "diffEditor.removedLineBackground": "#e45b5b12",
+      "diffEditor.removedTextBackground": "#e45b5b24",
+      "diffEditorGutter.insertedLineBackground": "#17a6731a",
+      "diffEditorGutter.removedLineBackground": "#e45b5b1a",
+      "editorHoverWidget.border": "#dee1e5",
+      "editorHoverWidget.background": "#ffffff"
+    }
+  },
+  "di": {
+    "base": "vs-dark",
+    "inherit": true,
+    "rules": [
+      {
+        "token": "",
+        "foreground": "#c4c7cc"
+      },
+      {
+        "token": "keyword",
+        "foreground": "#0f8cff"
+      },
+      {
+        "token": "function",
+        "foreground": "#0f8cff"
+      },
+      {
+        "token": "comment",
+        "foreground": "#747a8a"
+      },
+      {
+        "token": "normal",
+        "foreground": "#c4c7cc"
+      },
+      {
+        "token": "brackets",
+        "foreground": "#c4c7cc"
+      },
+      {
+        "token": "string",
+        "foreground": "#19a96f"
+      },
+      {
+        "token": "variable.builtin",
+        "foreground": "#c36464"
+      },
+      {
+        "token": "identifier",
+        "foreground": "#c4c7cc"
+      },
+      {
+        "token": "number",
+        "foreground": "#da7a43"
+      },
+      {
+        "token": "delimiter",
+        "foreground": "#76b5a5"
+      }
+    ],
+    "colors": {
+      "editor.background": "#0d0e0f",
+      "editor.selectionBackground": "#0f8cff60",
+      "editor.inactiveSelectionBackground": "#0f8cff50",
+      "editor.selectionHighlightBackground": "#0f8cff10",
+      "editor.selectionHighlightBorder": "#0f8cff80",
+      "editor.selectionForeground": "",
+      "editorCursor.foreground": "#0f8cff",
+      "editor.lineHighlightBackground": "#0f8cff20",
+      "editorLineNumber.foreground": "#747a8a",
+      "editorLineNumber.activeForeground": "#aab6c4",
+      "diffEditor.insertedLineBackground": "#1ac98a18",
+      "diffEditor.insertedTextBackground": "#1ac98a30",
+      "diffEditor.removedLineBackground": "#ef6a6a18",
+      "diffEditor.removedTextBackground": "#ef6a6a30",
+      "diffEditorGutter.insertedLineBackground": "#1ac98a20",
+      "diffEditorGutter.removedLineBackground": "#ef6a6a20",
+      "searchEditor.findMatchBackground": "#23252a",
+      "searchEditor.findMatchBorder": "#2d2e34",
+      "searchEditor.textInputBorder": "#34353c",
+      "editorHoverWidget.border": "#34353c",
+      "editorHoverWidget.background": "#0d0e0f"
+    }
+  },
+  "fF": {
+    "colorDecorators": true,
+    "fixedOverflowWidgets": true,
+    "fontSize": 14,
+    "formatOnPaste": true,
+    "links": false,
+    "minimap": {
+      "enabled": false
+    },
+    "overviewRulerBorder": false,
+    "overviewRulerLanes": 2,
+    "quickSuggestionsDelay": 100,
+    "renderControlCharacters": false,
+    "renderWhitespace": "none",
+    "scrollBeyondLastLine": false,
+    "tabSize": 2,
+    "wordBasedSuggestions": "currentDocument"
+  },
+  "fR": "ace-light",
+  "xf": {
+    "wordPattern": {
+      "__regex": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
+      "__flags": "g"
+    },
+    "comments": {
+      "lineComment": "//",
+      "blockComment": [
+        "/*",
+        "*/"
+      ]
+    },
+    "brackets": [
+      [
+        "{",
+        "}"
+      ],
+      [
+        "[",
+        "]"
+      ],
+      [
+        "(",
+        ")"
+      ]
+    ],
+    "onEnterRules": [
+      {
+        "beforeText": {
+          "__regex": "^\\s*\\/\\*\\*(?!\\/)([^\\*]|\\*(?!\\/))*$",
+          "__flags": ""
+        },
+        "afterText": {
+          "__regex": "^\\s*\\*\\/$",
+          "__flags": ""
+        },
+        "action": {
+          "indentAction": 2,
+          "appendText": " * "
+        }
+      },
+      {
+        "beforeText": {
+          "__regex": "^\\s*\\/\\*\\*(?!\\/)([^\\*]|\\*(?!\\/))*$",
+          "__flags": ""
+        },
+        "action": {
+          "indentAction": 0,
+          "appendText": " * "
+        }
+      },
+      {
+        "beforeText": {
+          "__regex": "^(\\t|(\\ \\ ))*\\ \\*(\\ ([^\\*]|\\*(?!\\/))*)?$",
+          "__flags": ""
+        },
+        "action": {
+          "indentAction": 0,
+          "appendText": "* "
+        }
+      },
+      {
+        "beforeText": {
+          "__regex": "^(\\t|(\\ \\ ))*\\ \\*\\/\\s*$",
+          "__flags": ""
+        },
+        "action": {
+          "indentAction": 0,
+          "removeText": 1
+        }
+      }
+    ],
+    "autoClosingPairs": [
+      {
+        "open": "{",
+        "close": "}"
+      },
+      {
+        "open": "[",
+        "close": "]"
+      },
+      {
+        "open": "(",
+        "close": ")"
+      },
+      {
+        "open": "\"",
+        "close": "\"",
+        "notIn": [
+          "string"
+        ]
+      },
+      {
+        "open": "'",
+        "close": "'",
+        "notIn": [
+          "string",
+          "comment"
+        ]
+      },
+      {
+        "open": "`",
+        "close": "`",
+        "notIn": [
+          "string",
+          "comment"
+        ]
+      },
+      {
+        "open": "/**",
+        "close": " */",
+        "notIn": [
+          "string"
+        ]
+      }
+    ],
+    "folding": {
+      "markers": {
+        "start": {
+          "__regex": "^\\s*\\/\\/\\s*#?region\\b",
+          "__flags": ""
+        },
+        "end": {
+          "__regex": "^\\s*\\/\\/\\s*#?endregion\\b",
+          "__flags": ""
+        }
+      }
+    }
+  }
+}
